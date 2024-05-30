@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="{{logo}}">
+    </header>
+    <main>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">文章管理</div>
+                    <div class="card-body">
+                        <table class=table>
+                            <thead>
+                                <th>标题</th>
+                                <th>分类</th>
+                                <th>阅读量</th>
+                                <th>操作</th>
+                            </thead>
+                            <tbody>
+                                {% for i in texts %}
+                                <tr>
+                                    <td>{{i.title}}</td>
+                                    <td>{{i.fl}}</td>
+                                    <td>{{i.read}}</td>
+                                    <td>
+                                        <a href="/bj/?name={{i.title}}">编辑</a>
+                                        <a href="/admin/?act=sc&t={{i.title}}">删除</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                        <a href="/bj/">
+                            <button type="button" class="btn btn-primary">新增文章</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">分类管理</div>
+                    <div class="card-body">
+                        <table class=table>
+                            <thead>
+                                <th>分类名</th>
+                                <th>文章数量</th>
+                                <th>操作</th>
+                            </thead>
+                            <tbody>
+                                {% for i in fls %}
+                                <tr>
+                                <td>{{i.fl}}</td>
+                                <td>{{i.sum}}</td>
+                                <td><a href="/admin/?act=scfl&t={{i.fl}}">删除</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <form action="/admin/" method="get">
+                        <div class="input-group mb-3 col-md-5">
+                        <input type="text" name="t" class="form-control">
+                        <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="添加"></div></div>
+                        <input type="hidden" name="act" value="addfl">
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">设置</div>
+                    <div class="card-body">
+                        <form action="/admin/" method="get">
+                        <table class=table>
+                            <thead>
+                                <th>设置项</th>
+                                <th>值</th>
+                            </thead>
+                            <tbody>
+                                
+                                {% for i in sets %}
+                                <tr>
+                                <td>{{i.setname}}</td>
+                                <td>
+                                    <div class="input-group mb-3">
+                                    <input type="text" class=form-control value="{{i.value}}" name={{i.set}}></div></td></tr>
+                                {% endfor %}
+                                <tr>
+                                    <th colspan="2"><input type="submit" class="btn btn-primary"><input type="hidden" name="act" value="setchange"></th>
+                                </tr>
+                            
+                            </tbody>
+                        </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">友链设置</div>
+                    <div class="card-body">
+                        <form action="/admin/" method="get">
+                        <table class=table>
+                            <thead>
+                                <th>名字</th>
+                                <th>图片</th>
+                                <th>链接</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </thead>
+                            <tbody>
+                                
+                                {% for i in friends %}
+                                <tr>
+                                    <td>{{i.name}}</td>
+                                    <td>{{i.img}}</td>
+                                    <td>{{i.url}}</td>
+                                    <td>{{i.describe}}</td>
+                                    <td><a href="/admin/?act=scyl&t={{i.name}}">删除</a></td>
+                                </tr>
+                                {% endfor %}
+                            <tr>
+                                <form action="/admin/" method="get">
+                                <td>
+                                    <input type="text" class=form-control name=name>
+                                </td>
+                                <td>
+                                    <input type="text" class=form-control name=img>
+                                </td>
+                                <td>
+                                    <input type="text" class=form-control name=url>
+                                </td>
+                                <td>
+                                    <input type="text" class=form-control name=describe>
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-primary">
+                                    <input type="hidden" name="act" value="addyl">
+                                </td>
+                            </form>
+                            </tr>
+                            </tbody>
+                        </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <center>
+            &copy; 2021 {{name}}|power by ckappblog<br>
+            <a href="/ys/">隐私政策</a><br>
+            {{foot|safe}}
+        </center>
+    </footer>
+</body>
+
+</html>

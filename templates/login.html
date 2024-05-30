@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{name}}</title>
+<style>
+	.main{
+		background: #6AA168;
+		height: 500px;
+		justify-content:center;
+		display: flex;
+		align-items: center
+	}
+
+	</style>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+ 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+
+<body>
+	
+<header>
+	<img src="{{logo}}">
+</header>
+<main class="main">
+<div >
+	<center>
+<form action="/login/" method="get">
+	{{note|safe }}
+	
+	<div class="input-group">
+		<span class="input-group-addon">账号</span>
+        <input type="text" class="form-control" name="user"> </div><br><div class="input-group">
+        <span class="input-group-addon">密码</span>
+        <input type="password" class="form-control" name="pass">
+        </div><br>
+	<input type="submit" class="btn btn-primary">
+	
+	</form>
+	</center>
+	</div>
+	</main>
+    <footer>
+        <center>
+            &copy; 2021 {{name}}|power by ckappblog<br>
+            <a href="/ys/">隐私政策</a><br>
+            {{foot|safe}}
+        </center>
+    </footer>
+</body>
+</html>

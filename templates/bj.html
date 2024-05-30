@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="{{logo}}">
+    </header>
+    <main>
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="/admin/">后台</a>
+            <a class="breadcrumb-item" href="/bj/">文章编辑</a>
+            <span class="breadcrumb-item active">{{title}}</span>
+        </nav>
+        <div class="row">
+            <div class="col-md-8 offset-md-2 ">
+
+                <form action="/bj/" method="get">
+                    <input type="hidden" name="oldname" value="{{title}}">
+                    <input type="hidden" name="act" value="change">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">标题</span>
+                        </div>
+                        <input type="text" class="form-control" name="name" value="{{title}}">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">文章描述</span>
+                        </div>
+                        <input type="text" class="form-control" name="describe" value="{{describe}}">
+                      </div>
+                      <div class="card">
+                        <div class="card-header">分类</div>
+                        <div class="card-body">
+                            {% for i in texts %}
+                            <input type="radio" name="lb" value="{{i.lb}}"  id=defaultRadio {{i.checked}}>
+                            <label for="defaultRadio">{{i.lb}}</label>
+                            {% endfor %}
+                        </div> 
+                      </div><br>
+                    <textarea name="body" id="editor1" class="ckeditor" rows="10" cols="80">
+                {{body|safe}}
+            </textarea>
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <footer>
+            <center>
+                &copy; 2021 {{name}}|power by ckappblog<br>
+                <a href="/ys/">隐私政策</a><br>
+                {{foot|safe}}
+            </center>
+        </footer>
+    </footer>
+
+</body>
+
+</html>
